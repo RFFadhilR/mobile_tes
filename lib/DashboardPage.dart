@@ -45,7 +45,7 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     final matchWidth = MediaQuery.of(context).size.width;
-    // final matchHeight = MediaQuery.of(context).size.height;
+    final matchHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       drawer: Sidebar(),
       appBar: AppBar(
@@ -67,15 +67,17 @@ class _DashboardPageState extends State<DashboardPage> {
               children: [
                 Image(
                   image: AssetImage("image/top_home.png"),
+                  width: double.infinity,
+                  fit: BoxFit.fitWidth,
                 ),
                 Padding(
                   padding: EdgeInsets.only(right: 50),
                   child: Container(
-                    width: 78,
-                    height: 78,
+                    width: matchWidth * 0.199,
+                    height: matchHeight * 0.11,
                     decoration: BoxDecoration(
                       color: HexColor("#363563"),
-                      borderRadius: BorderRadius.circular(50),
+                      borderRadius: BorderRadius.circular(100),
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
