@@ -1,9 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/io_client.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import 'Model.dart';
@@ -18,10 +19,13 @@ class _DashboardPageState extends State<DashboardPage> {
   List<Data> list;
 
   getData() async {
-    String link = "http://tes-mobile.landa.id/index.php";
-    var res = await http
-        .get(Uri.parse(link), headers: {"Accept": "application/json"});
-    // print(res.body);
+    String link = "https://tes-mobile.landa.id/index.php";
+    HttpClient client = new HttpClient();
+    client.badCertificateCallback =
+        ((X509Certificate cert, String host, int port) => true);
+    final http = new IOClient(client);
+    var res = await http.get(Uri.parse(link));
+    print(res.body);
     if (res.statusCode == 200) {
       var data = jsonDecode(res.body);
       // print(data['data'][0]['detail']);
@@ -40,7 +44,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   Widget build(BuildContext context) {
-    // final matchWidth = MediaQuery.of(context).size.width;
+    final matchWidth = MediaQuery.of(context).size.width;
     // final matchHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       drawer: Sidebar(),

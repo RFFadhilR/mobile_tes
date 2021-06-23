@@ -5,6 +5,7 @@
 
     <application
         android:icon="@mipmap/ic_launcher"
+        android:usesCleartextTraffic="true"
         android:label="mobile_tes">
         <activity
             android:name=".MainActivity"
